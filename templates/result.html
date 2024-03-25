@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/62b29b94f5.js" crossorigin="anonymous"></script>
+    <title>URL Shortener Result</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            background: #001f3f; /* Dark blue background */
+            position: relative;
+        }
+
+        h1, p {
+            color: #fff; /* White text */
+            text-align: center;
+            z-index: 1; /* Place text above stars */
+        }
+
+        a {
+            color: #33adff; /* Light blue link */
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 10px;
+            z-index: 1; /* Place link above stars */
+        }
+
+        a:hover {
+            text-decoration: ;
+        }
+
+        /* Stars animation */
+        .stars {
+            width: 2px;
+            height: 2px;
+            background: #fff; /* White stars */
+            box-shadow: 0 0 5px #fff, 0 0 10px #fff; /* White glow effect */
+            position: absolute;
+            animation: stars 5s linear infinite; /* Adjust speed as needed */
+        }
+
+        @keyframes stars {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100vh);
+            }
+        }
+
+        /* Generate 10 to 30 random stars with glowing tails */
+        @for $i from 1 through 50 {
+            .stars:nth-child(#{$i}) {
+                top: random(100vh);
+                left: random(100vw);
+                animation-delay: random(2s); /* Adjust delay for more randomness */
+                animation-duration: random(2s); /* Adjust duration for more randomness */
+            }
+        }
+        .back-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 15px; /* Add margin to create a gap */
+            display: inline-block; /* Ensures the margin-top works as expected */
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+
+        /* Copy button styles */
+        .copy-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+            margin-left: 13px;
+            display: inline-block;
+        }
+
+        .copy-button:hover {
+            background-color: #45a049;
+        }
+
+        .copy-status {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <h1>URL Shortener Result😍</h1>
+    <p>Your short URL is: <a href="{{ short_url }}" id="shortUrl">{{ short_url }}</a>
+        <button class="copy-button" onclick="copyToClipboard()"><i class="fa-regular fa-copy"></i></button>
+        <span class="copy-message" id="copyMessage"></span>
+    </p>
+    <a href="/" class="back-button">Back to Home</a>
+
+    <script>
+        function copyToClipboard() {
+            /* Get the text from the URL */
+            var shortUrl = document.getElementById("shortUrl");
+            var textToCopy = shortUrl.href;
+
+            /* Create a temporary input element to copy the text */
+            var tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+
+            /* Select and copy the text */
+            tempInput.select();
+            document.execCommand("copy");
+
+            /* Remove the temporary input element */
+            document.body.removeChild(tempInput);
+
+            /* Show "Copied!" message */
+            var copyMessage = document.getElementById("copyMessage");
+            copyMessage.innerHTML = "Copied!";
+            setTimeout(function () {
+                copyMessage.innerHTML = ""; // Clear the message after a few seconds
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

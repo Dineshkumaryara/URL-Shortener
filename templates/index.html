@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener ⚡</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-image 1s ease; /* Add transition for background-image */
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        form {
+            max-width: 600px; /* Increased max-width for the form */
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const body = document.body;
+            const images = [
+                'static/images/url.jpg',
+                'static/images/url2.jpg',
+                'static/images/url4.jpg'
+            ];
+            let currentImageIndex = 0;
+
+            function changeBackground() {
+                body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+            }
+
+            // Initial background image
+            changeBackground();
+
+            // Change background image every 4 seconds
+            setInterval(changeBackground, 3000);
+        });
+    </script>
+</head>
+<body>
+    <h1>URL Shortener🔥</h1>
+    <form action="/shorten" method="post">
+        <label for="long_url">Enter your URL:</label>
+        <input type="text" id="long_url" name="long_url" required>
+        <button type="submit">See the magic😜</button>
+    </form>
+</body>
+</html>
